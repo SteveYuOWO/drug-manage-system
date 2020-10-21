@@ -13,6 +13,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -32,9 +33,9 @@ public class PurchaseService {
                 .setUser(userDao.findById(purchaseDto.getUserId()).get()));
     }
 
-    public Page<Purchase> getAllPurchasesByUserId(Pageable pageable, int userId) {
+    public List<Purchase> getAllPurchasesByUserId(int userId) {
         Optional<User> userOptional = userDao.findById(userId);
-        return purchaseDao.findAll(Example.of(new Purchase().setUser(userOptional.get())), pageable);
+        return purchaseDao.findAll(Example.of(new Purchase().setUser(userOptional.get())));
     }
 
     public boolean deletePurchaseById(Integer id) {

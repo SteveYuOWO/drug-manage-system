@@ -8,6 +8,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("api/purchase")
 public class PurchaseApi {
@@ -19,11 +21,9 @@ public class PurchaseApi {
         return "插入成功";
     }
 
-    @GetMapping("{page}/{size}/{userId}")
-    public Page<Purchase> getAllPurchasesByUserId(@PathVariable("page") int page,
-                                                  @PathVariable("size") int size,
-                                                  @PathVariable("userId") int userId) {
-        return purchaseService.getAllPurchasesByUserId(PageRequest.of(page, size), userId);
+    @GetMapping("{userId}")
+    public List<Purchase> getAllPurchasesByUserId(@PathVariable("userId") int userId) {
+        return purchaseService.getAllPurchasesByUserId(userId);
     }
 
     @DeleteMapping("{id}")

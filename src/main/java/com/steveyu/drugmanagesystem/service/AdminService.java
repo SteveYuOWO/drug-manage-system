@@ -7,6 +7,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -14,8 +15,8 @@ public class AdminService {
     @Autowired
     AdminDao adminDao;
 
-    public Page<Admin> getAllAdmins(Pageable pageable) {
-        return adminDao.findAll(pageable);
+    public List<Admin> getAllAdmins() {
+        return adminDao.findAll();
     }
 
     public void saveAdmin(Admin admin) {
@@ -31,5 +32,9 @@ public class AdminService {
         if(adminOptional.isEmpty()) return false;
         adminDao.delete(adminOptional.get());
         return true;
+    }
+
+    public Optional<Admin> getAdminByName(String username) {
+        return adminDao.findByUsername(username);
     }
 }

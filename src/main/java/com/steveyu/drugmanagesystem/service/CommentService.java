@@ -14,6 +14,8 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -24,10 +26,11 @@ public class CommentService {
     UserDao userDao;
     @Autowired
     CommentDao commentDao;
-    public Page<Comment> getCommentByAdminId(Integer id, Pageable pageable) {
+    public List<Comment> getCommentByAdminId(Integer id) {
         Optional<Admin> admin = adminDao.findById(id);
-        return commentDao.findAll(Example.of(new Comment().
-                setTo(admin.get())), pageable);
+        if(!admin.isEmpty()) return commentDao.findAll(Example.of(new Comment().
+                setTo(admin.get())));
+        else return new ArrayList<>();
     }
 
     public void saveComment(CommentDto commentDto) {

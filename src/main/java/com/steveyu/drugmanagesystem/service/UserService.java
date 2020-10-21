@@ -8,6 +8,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -15,8 +16,8 @@ public class UserService {
     @Autowired
     UserDao userDao;
 
-    public Page<User> getAllUsers(Pageable pageable) {
-        return userDao.findAll(pageable);
+    public List<User> getAllUsers() {
+        return userDao.findAll();
     }
 
     public void saveUser(User user) {
@@ -32,5 +33,9 @@ public class UserService {
         if(userOptional.isEmpty()) return false;
         userDao.delete(userOptional.get());
         return true;
+    }
+
+    public Optional<User> getUserByUsername(String username) {
+        return userDao.findByUsername(username);
     }
 }

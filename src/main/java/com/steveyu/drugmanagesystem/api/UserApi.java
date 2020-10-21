@@ -8,6 +8,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.web.bind.annotation.*;
 
 import java.awt.print.Pageable;
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -16,9 +17,9 @@ public class UserApi {
     @Autowired
     UserService userService;
 
-    @GetMapping("{page}/{size}")
-    public Page<User> getAllUsers(@PathVariable("page") int page, @PathVariable("size") int size) {
-        return userService.getAllUsers(PageRequest.of(page, size));
+    @GetMapping
+    public List<User> getAllUsers() {
+        return userService.getAllUsers();
     }
 
     @PostMapping

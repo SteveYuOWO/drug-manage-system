@@ -8,6 +8,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("api/drugcomment")
 public class DrugCommentApi {
@@ -20,11 +22,9 @@ public class DrugCommentApi {
         return "插入成功";
     }
 
-    @GetMapping("{page}/{size}/{drugId}")
-    public Page<DrugComment> getAllDrugCommentsByDrugId(@PathVariable("page") Integer page,
-                                    @PathVariable("size") Integer size,
-                                    @PathVariable("drugId") Integer drugId) {
-        return drugCommentService.getAllDrugCommentsByDrugId(PageRequest.of(page, size), drugId);
+    @GetMapping("{drugId}")
+    public List<DrugComment> getAllDrugCommentsByDrugId(@PathVariable("drugId") Integer drugId) {
+        return drugCommentService.getAllDrugCommentsByDrugId(drugId);
     }
 
     @DeleteMapping("{id}")

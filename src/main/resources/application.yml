@@ -1,14 +1,14 @@
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/drug
+    url: jdbc:mysql://120.78.206.78:3306/drug?serverTimezone=UTC&characterEncoding=UTF-8
     username: root
-    password: 123456
+    password: Root123..
   jpa:
-    generate-ddl: true
-    show-sql: true
+    hibernate:
+      ddl-auto: update
 
 server:
-  port: 8080
+  port: 8081
   servlet:
     context-path: /drug

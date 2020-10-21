@@ -3,10 +3,9 @@ package com.steveyu.drugmanagesystem.api;
 import com.steveyu.drugmanagesystem.entity.Admin;
 import com.steveyu.drugmanagesystem.service.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -15,9 +14,9 @@ public class AdminApi {
     @Autowired
     AdminService adminService;
 
-    @GetMapping("{page}/{size}")
-    public Page<Admin> getAllAdmins(@PathVariable("page") int page,@PathVariable("size") int size) {
-        return adminService.getAllAdmins(PageRequest.of(page, size));
+    @GetMapping
+    public List<Admin> getAllAdmins() {
+        return adminService.getAllAdmins();
     }
 
     @PostMapping

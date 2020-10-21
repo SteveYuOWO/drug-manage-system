@@ -8,6 +8,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.web.bind.annotation.*;
 
 import javax.swing.text.html.Option;
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -16,9 +17,9 @@ public class DrugApi {
     @Autowired
     DrugService drugService;
 
-    @GetMapping("{page}/{size}")
-    public Page<Drug> getAllDrugs(@PathVariable("page") int page, @PathVariable("size") int size) {
-        return drugService.getAllDrugs(PageRequest.of(page, size));
+    @GetMapping
+    public List<Drug> getAllDrugs() {
+        return drugService.getAllDrugs();
     }
     @PostMapping
     public String saveDrug(@RequestBody Drug drug) {

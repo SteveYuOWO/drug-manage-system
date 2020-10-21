@@ -12,6 +12,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -32,9 +33,9 @@ public class DrugCommentService {
                 .setMessage(drugCommentDto.getMessage()));
     }
 
-    public Page<DrugComment> getAllDrugCommentsByDrugId(Pageable pageable, Integer drugId) {
+    public List<DrugComment> getAllDrugCommentsByDrugId(Integer drugId) {
         Drug drug = drugDao.findById(drugId).get();
-        return drugCommentDao.findAll(Example.of(new DrugComment().setTo(drug)), pageable);
+        return drugCommentDao.findAll(Example.of(new DrugComment().setTo(drug)));
     }
 
     public boolean deleteDrugCommentById(Integer id) {
