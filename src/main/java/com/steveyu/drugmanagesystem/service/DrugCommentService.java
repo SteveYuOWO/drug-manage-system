@@ -44,4 +44,8 @@ public class DrugCommentService {
         drugCommentDao.deleteById(id);
         return true;
     }
+
+    public List<DrugComment> getAllDrugCOmments() {
+        return drugCommentDao.findAll();
+    }
 }

@@ -20,7 +20,5 @@ public class Comment {
     Integer id;
     @OneToOne(targetEntity = User.class)
     User from;
-    @OneToOne(targetEntity = Admin.class)
-    Admin to;
     String message;
 }

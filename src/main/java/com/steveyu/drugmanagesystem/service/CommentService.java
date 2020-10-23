@@ -9,9 +9,6 @@ import com.steveyu.drugmanagesystem.entity.Comment;
 import com.steveyu.drugmanagesystem.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -26,20 +23,16 @@ public class CommentService {
     UserDao userDao;
     @Autowired
     CommentDao commentDao;
-    public List<Comment> getCommentByAdminId(Integer id) {
-        Optional<Admin> admin = adminDao.findById(id);
-        if(!admin.isEmpty()) return commentDao.findAll(Example.of(new Comment().
-                setTo(admin.get())));
-        else return new ArrayList<>();
+
+    public List<Comment> getComment() {
+        return commentDao.findAll();
     }
 
     public void saveComment(CommentDto commentDto) {
-        Optional<Admin> adminOptional = adminDao.findById(commentDto.getAdminId());
         Optional<User> userOptional = userDao.findById(commentDto.getUserId());
         commentDao.save(new Comment()
                 .setMessage(commentDto.getMessage())
-                .setFrom(userOptional.get())
-                .setTo(adminOptional.get()));
+                .setFrom(userOptional.get()));
     }
 
     public boolean deleteCommentById(Integer id) {

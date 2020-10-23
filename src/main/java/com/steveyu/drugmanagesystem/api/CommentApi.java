@@ -14,16 +14,16 @@ public class CommentApi {
     @Autowired
     CommentService commentService;
 
-    @GetMapping("{id}")
-    public List<Comment> getCommentByAdminId(@PathVariable("id") Integer id) {
+    @GetMapping
+    public List<Comment> getComment() {
 
-        return commentService.getCommentByAdminId(id);
+        return commentService.getComment();
     }
 
     @PostMapping
     public String  saveComment(@RequestBody CommentDto commentDto) {
         commentService.saveComment(commentDto);
-        return "插入成功";
+        return "留言成功";
     }
 
     @DeleteMapping("{id}")

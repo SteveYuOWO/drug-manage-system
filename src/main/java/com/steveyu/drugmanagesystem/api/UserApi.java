@@ -24,8 +24,12 @@ public class UserApi {
 
     @PostMapping
     public String saveUser(@RequestBody User user) {
-        userService.saveUser(user);
-        return "插入成功";
+        if(userService.getUserByUsername(user.getUsername()).isEmpty()) {
+            userService.saveUser(user);
+            return "注册成功";
+        } else {
+            return "该用户已存在";
+        }
     }
 
     @GetMapping("{id}")

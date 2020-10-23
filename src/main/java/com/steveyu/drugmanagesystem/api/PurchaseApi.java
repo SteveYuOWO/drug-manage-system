@@ -18,7 +18,7 @@ public class PurchaseApi {
     @PostMapping
     public String savePurchase(@RequestBody PurchaseDto purchaseDto) {
         purchaseService.savePurchase(purchaseDto);
-        return "插入成功";
+        return "购买成功";
     }
 
     @GetMapping("{userId}")
